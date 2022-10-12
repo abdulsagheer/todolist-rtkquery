@@ -52,14 +52,12 @@ article {
   text-align: center;
 }
 
- 
 .header:after {
   content: "";
   display: table;
   clear: both;
 }
 
- 
 input {
   margin: 0;
   border: none;
@@ -101,7 +99,7 @@ ul li {
   background: #eee;
   font-size: 18px;
   transition: 0.2s;
-  
+
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -123,7 +121,7 @@ ul li.checked {
 }
 
 ul li.checked::before {
-  content: '';
+  content: "";
   position: absolute;
   border-color: #fff;
   border-style: solid;
