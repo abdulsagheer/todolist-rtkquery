@@ -1,8 +1,16 @@
 import { useState } from "react";
 import "./App.css";
+import { useGetTodosQuery } from "./feature/api/apiSlice";
 
 function App() {
   const [todo, setTodo] = useState("");
+  const {
+    data: todos,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetTodosQuery();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,6 +19,22 @@ function App() {
       setTodo("");
     }
   };
+
+  let content;
+  if (content) {
+    content = <p>Loading...</p>;
+  } else if (isSuccess) {
+    content = todos.map((todo) => (
+      <ul>
+        <li className={todo.completed ? "checked" : ""}>
+          {todo.title}
+          <span className="close">x</span>
+        </li>
+      </ul>
+    ));
+  } else if (isError) {
+    content = <p>{error}</p>;
+  }
 
   return (
     <div className="App">
@@ -28,16 +52,7 @@ function App() {
           </button>
         </form>
       </div>
-      <ul>
-        <li className="checked">
-          Reading Book
-          <span className="close">x</span>
-        </li>
-        <li>
-          Watching Movies
-          <span className="close">x</span>
-        </li>
-      </ul>
+      {content}
     </div>
   );
 }
